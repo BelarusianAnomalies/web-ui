@@ -1,0 +1,72 @@
+#mainMap {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#dateSelector {
+    z-index: 99999;
+    position: absolute !important;
+    top: 8px;
+    left: 8px;
+    padding: 8px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    box-shadow: 0 0 4px #686767;
+}
+
+#dateSelector th {
+    text-align: right;
+}
+
+#dateSelector input {
+    font-size: 13px;
+    border: solid 1px lightgray;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+#dateSelector #updateMapButton {
+    background-color: #254f91;
+    border: solid 1px #1f4178;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 13px;
+    color: white;
+    height: 100%; width: 100%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dateSelector #updateMapButton p {
+    margin: 4px auto;
+}
+
+#dateSelector div.title * {
+    margin: auto;
+    text-align: center;
+}
+
+.react-datepicker {
+    display: inline-flex !important;
+}
+
+.loader {
+    margin: auto;
+
+    border: 4px solid transparent;
+    border-top: 4px solid white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
