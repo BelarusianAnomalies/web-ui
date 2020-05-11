@@ -172,7 +172,7 @@ class Map extends React.Component {
                             <tr>
                                 <th>По:</th>
                                 <td>
-                                    <DatePicker locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.toDate} onChange={this.updateToDate} />
+                                    <DatePicker locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.toDate} minDate={state.sinceDate} onChange={this.updateToDate} />
                                 </td>
                             </tr>
                             <tr>
