@@ -17,11 +17,30 @@
     box-shadow: 0 0 2px #686767;
 }
 
-#dateSelector th {
-    text-align: right;
+#dateSelector div.settings {
+    display: flex;
+    flex-flow: column;
+    margin: 4px 0;
+}
+
+#dateSelector div.settings div.settings-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    grid-template-areas: "label input";
+}
+
+#dateSelector div.settings div.settings-row span {
+    grid-area: label;
+    margin: auto 8px auto auto;
+}
+
+#dateSelector div.settings div.settings-row div.input {
+    grid-area: input;
 }
 
 #dateSelector input {
+    width: calc(100% - 8px);
+
     font-size: 13px;
     border: solid 1px lightgray;
     border-radius: 4px;
@@ -35,7 +54,8 @@
     padding: 4px;
     font-size: 13px;
     color: white;
-    height: 100%; width: 100%;
+    height: 100%;
+    width: 100%;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -69,4 +89,36 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media(max-width: 420px) {
+    #dateSelector {
+        width: calc(100% - 16px);
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    }
+
+    #dateSelector div.notes {
+        display: none;
+    }
+
+    #dateSelector input {
+        width: calc(100% - 10px);
+    }
+    #dateSelector div.settings div.settings-row {
+        grid-template-columns: 0 1fr;
+    }
+
+    #dateSelector div.settings div.mobile-nonsense {
+        grid-template-columns: 36px 1fr;
+    }
+
+    #dateSelector div.settings div.settings-row span {
+        display: none;
+    }
+
+    #dateSelector div.settings div.mobile-nonsense span {
+        display: block;
+    }
 }

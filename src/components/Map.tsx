@@ -204,46 +204,42 @@ ${JSON.stringify(item)}
                     <div className="title">
                         <h3>Тепловые аномалии</h3>
                     </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>С:</th>
-                                <td>
-                                    <DatePicker selectsStart startDate={state.sinceDate} endDate={state.toDate} locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.sinceDate} onChange={this.updateSinceDate} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>По:</th>
-                                <td>
-                                    <DatePicker selectsEnd startDate={state.sinceDate} endDate={state.toDate} locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.toDate} minDate={state.sinceDate} onChange={this.updateToDate} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Кол-во (max):</th>
-                                <td>
-                                    <input type="number" value={state.count} onChange={this.updateSelectionCount} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}>
-                                    <button id="updateMapButton" onClick={this.updateMapData} disabled={state.isLoading}>
-                                        {
-                                            state.isLoading ? <div className="loader"/> :
-                                            <p>
-                                                Обновить
-                                            </p>
-                                        }
-                                    </button>
-                                    {
-                                        state.error != null ? <small>Произошла ошибка</small> : null
-                                    }
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <small>* Данные обновляются каждые 5 минут</small>
-                    <br />
-                    <small>* Время - местное</small>
+                    <div className="settings">
+                        <div className="settings-row mobile-nonsense">
+                            <span>С:</span>
+                            <div className="input">
+                                <DatePicker selectsStart startDate={state.sinceDate} endDate={state.toDate} locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.sinceDate} onChange={this.updateSinceDate} />
+                            </div>
+                        </div>
+                        <div className="settings-row mobile-nonsense">
+                            <span>По:</span>
+                            <div className="input">
+                                <DatePicker selectsEnd startDate={state.sinceDate} endDate={state.toDate} locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.toDate} minDate={state.sinceDate} onChange={this.updateToDate} />
+                            </div>
+                        </div>
+                        <div className="settings-row">
+                            <span>Кол-во (max):</span>
+                            <div className="input">
+                                <input type="number" value={state.count} onChange={this.updateSelectionCount} />
+                            </div>
+                        </div>
+                    </div>
+                    <button id="updateMapButton" onClick={this.updateMapData} disabled={state.isLoading}>
+                        {
+                            state.isLoading ? <div className="loader"/> :
+                                <p>
+                                    Обновить
+                                </p>
+                        }
+                    </button>
+                    {
+                        state.error != null ? <small>Произошла ошибка</small> : null
+                    }
+                    <div className="notes">
+                        <small>* Данные обновляются каждые 5 минут</small>
+                        <br />
+                        <small>* Время - местное</small>
+                    </div>
                 </div>
             </React.Fragment>
         );
