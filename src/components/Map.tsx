@@ -92,7 +92,7 @@ class Map extends React.Component {
         MeteoEyeAPI.requestData(state.count, state.sinceDate, state.toDate, bounds).then(page => {
             this.setState({items: page.items});
             this.addPoints();
-            this.setState({isLoading: false});
+            this.setState({isLoading: false, error: null});
         }).catch(error => this.setState({error}));
     }
 
@@ -192,6 +192,9 @@ class Map extends React.Component {
                                             </p>
                                         }
                                     </button>
+                                    {
+                                        state.error != null ? <small>Произошла ошибка</small> : null
+                                    }
                                 </td>
                             </tr>
                         </tbody>
