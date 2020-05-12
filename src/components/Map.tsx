@@ -93,7 +93,7 @@ class Map extends React.Component {
             this.setState({items: page.items});
             this.addPoints();
             this.setState({isLoading: false, error: null});
-        }).catch(error => this.setState({error}));
+        }).catch(error => this.setState({isLoading: false, error}));
     }
 
     private addPoints() {
