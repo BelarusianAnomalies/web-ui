@@ -203,9 +203,6 @@ ${JSON.stringify(item)}
                 <div id="dateSelector">
                     <div className="title">
                         <h3>Тепловые аномалии</h3>
-                        <p>
-                            <small>Тепловые аномалии - не пожары</small>
-                        </p>
                     </div>
                     <table>
                         <tbody>
