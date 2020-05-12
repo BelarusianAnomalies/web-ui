@@ -77,7 +77,7 @@ class Map extends React.Component {
         this.loadPoints();
 
         const updater = setInterval(() => {
-            this.loadPoints();
+            this.loadPoints(this.state, null, true);
         }, 5 * 60 * 1000);
         this.setState({updater: updater})
     }
@@ -86,19 +86,30 @@ class Map extends React.Component {
         clearInterval((this.state as MapState).updater);
     }
 
-    private loadPoints(s: any = this.state, bounds: any = null) {
+    private loadPoints(s: any = this.state, bounds: any = null, update: boolean = false) {
         this.setState({isLoading: true});
         const state = s as MapState;
+
+        if (!update) {
+            // @ts-ignore
+            window.gtag('event', 'search', { searchterm : `${state.sinceDate.toISOString()}->${state.toDate.toISOString()}, count: ${state.count}` });
+        }
+
         MeteoEyeAPI.requestData(state.count, state.sinceDate, state.toDate, bounds).then(page => {
             this.setState({items: page.items});
-            this.addPoints();
+            this.addPoints(update);
             this.setState({isLoading: false, error: null});
-        }).catch(error => this.setState({isLoading: false, error}));
+        }).catch(error => {
+            this.setState({isLoading: false, error});
+        });
     }
 
-    private addPoints() {
+    private addPoints(update: boolean = false) {
         this.markersLayer.clearLayers();
-        (this.state as MapState).items.forEach((item: MeteoEyeResouse) => {
+
+        const state = (this.state as MapState)
+
+        state.items.forEach((item: MeteoEyeResouse) => {
             const coordinates = item.coordinatesWKT.match(/\(([^)]+)\)/)![0].split(' ').map(value => {
                 return parseFloat(value.replace('(', '').replace(')', ''))
             });
@@ -127,6 +138,11 @@ class Map extends React.Component {
 </table>
                 `);
         });
+
+        if (!update) {
+            // @ts-ignore
+            window.gtag('event', 'view_search_results', { searchterm : `${state.sinceDate.toISOString()}->${state.toDate.toISOString()}, count: ${state.count}` });
+        }
     }
 
     updateSinceDate(d: Date) {
