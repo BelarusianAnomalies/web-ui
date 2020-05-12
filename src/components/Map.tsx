@@ -57,7 +57,33 @@ class Map extends React.Component {
                 [bounds._southWest.lng, bounds._southWest.lat],
                 [bounds._southWest.lng, bounds._northEast.lat],
             ];
-            //this.loadPoints(this.state, bounds2)
+            // @ts-ignore
+            window.gtag('event', 'moved', {
+                'event_category' : 'map',
+                'event_label' : `northEast: ${bounds._northEast.lng}, ${bounds._northEast.lat}, southWest: ${bounds._southWest.lng}, ${bounds._southWest.lat}, `
+            });
+        });
+
+        this.map.on('popupopen', (event: L.PopupEvent) => {
+            // @ts-ignore
+            const object = JSON.parse((event.popup._container as HTMLElement).getElementsByClassName('map-marker-popup-fire')[0].innerHTML) as MeteoEyeResouse;
+
+            // @ts-ignore
+            window.gtag('event', 'open_popup', {
+                'event_category' : 'map',
+                'event_label' : `${object.id}: ${object.shootingDateTime}, ${object.coordinatesWKT}`
+            });
+        });
+
+        this.map.on('popupclose', (event: L.PopupEvent) => {
+            // @ts-ignore
+            const object = JSON.parse((event.popup._container as HTMLElement).getElementsByClassName('map-marker-popup-fire')[0].innerHTML) as MeteoEyeResouse;
+
+            // @ts-ignore
+            window.gtag('event', 'close_popup', {
+                'event_category' : 'map',
+                'event_label' : `${object.id}: ${object.shootingDateTime}, ${object.coordinatesWKT}`
+            });
         });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -116,6 +142,9 @@ class Map extends React.Component {
 
             L.marker({lat: coordinates[1], lng: coordinates[0]}, {icon: this.fireIcon}).addTo(this.markersLayer)
                 .bindPopup(`
+<div style="display: none;" class="map-marker-popup-fire">
+${JSON.stringify(item)}
+</div>
 <table>
     <tr>
         <th>Дата съёмки</th>
