@@ -24,6 +24,7 @@
 }
 
 #dateSelector div.settings div.settings-row {
+    margin: 4px 0;
     display: grid;
     grid-template-columns: 120px 1fr;
     grid-template-areas: "label input";
@@ -107,18 +108,10 @@
         width: calc(100% - 10px);
     }
     #dateSelector div.settings div.settings-row {
-        grid-template-columns: 0 1fr;
+        grid-template-columns: 68px 1fr;
     }
 
     #dateSelector div.settings div.mobile-nonsense {
         grid-template-columns: 36px 1fr;
-    }
-
-    #dateSelector div.settings div.settings-row span {
-        display: none;
-    }
-
-    #dateSelector div.settings div.mobile-nonsense span {
-        display: block;
     }
 }
