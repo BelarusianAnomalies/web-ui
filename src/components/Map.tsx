@@ -70,7 +70,7 @@ class Map extends React.Component {
 
         this.map.attributionControl.addAttribution('&copy; <a href="https://meteoeye.gis.by/">УП &quot;Геоинформационные системы&quot;</a>');
         this.map.attributionControl.addAttribution('&copy; <a href="https://github.com/pkosilo">Косило Павел</a>');
-        this.map.attributionControl.addAttribution('&copy; <a href="https://github.com/BelarusianAnomalies/web-ui">GitHub</a>');
+        this.map.attributionControl.addAttribution('<a href="https://github.com/BelarusianAnomalies/web-ui">GitHub</a>');
 
         this.markersLayer = L.layerGroup().addTo(this.map);
 
