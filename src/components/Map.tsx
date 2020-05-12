@@ -152,7 +152,7 @@ class Map extends React.Component {
     render() {
         const state = (this.state as MapState);
         return (
-            <div>
+            <React.Fragment>
                 <div id="mainMap" className="leaflet">
                 </div>
                 <div id="dateSelector">
@@ -203,7 +203,7 @@ class Map extends React.Component {
                     <br />
                     <small>* Время - местное</small>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
