@@ -1,13 +1,17 @@
 import React, {ChangeEvent} from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import './Map.css';
-import * as L from 'leaflet';
+import "./MarkerCluster.css";
+import * as L1 from 'leaflet';
+import * as L2 from 'leaflet.markercluster';
 import "react-datepicker/dist/react-datepicker.css";
 import MeteoEyeAPI from "../api/MeteoEyeAPI";
 import MeteoEyeResouse from "../api/MeteoEyeResouse";
 
 import ru from 'date-fns/locale/ru';
-registerLocale('ru', ru)
+registerLocale('ru', ru);
+
+const L = Object.assign(L1, L2);
 
 class Map extends React.Component {
     private fireIcon = L.icon({
@@ -98,7 +102,8 @@ class Map extends React.Component {
         this.map.attributionControl.addAttribution('&copy; <a href="https://github.com/pkosilo">Косило Павел</a>');
         this.map.attributionControl.addAttribution('<a href="https://github.com/BelarusianAnomalies/web-ui">GitHub</a>');
 
-        this.markersLayer = L.layerGroup().addTo(this.map);
+        this.markersLayer = L.markerClusterGroup();
+        this.markersLayer.addTo(this.map);
 
         this.loadPoints();
 
