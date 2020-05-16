@@ -48,8 +48,18 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
+        const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+
+        const ersi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; <a href="http://www.esri.com/">ESRI</a>',
+            maxZoom: 17,
+        });
+
         this.map = L.map('mainMap', {
-            zoomControl: false
+            zoomControl: false,
+            layers: [ersi, osm]
         }).setView([53.899602, 27.559529], 7);
 
         this.map.on('moveend', (event: any) => {
@@ -90,14 +100,6 @@ class Map extends React.Component {
             });
         });
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(this.map);
-
-        L.control.zoom({
-            position: 'bottomright'
-        }).addTo(this.map);
-
         this.map.attributionControl.addAttribution('&copy; <a href="https://meteoeye.gis.by/">УП &quot;Геоинформационные системы&quot;</a>');
         this.map.attributionControl.addAttribution('&copy; <a href="https://github.com/pkosilo">Косило Павел</a>');
         this.map.attributionControl.addAttribution('<a href="https://github.com/BelarusianAnomalies/web-ui">GitHub</a>');
@@ -111,6 +113,20 @@ class Map extends React.Component {
             this.loadPoints(this.state, null, true);
         }, 5 * 60 * 1000);
         this.setState({updater: updater})
+
+        const baseMaps = {
+            "Спутник": ersi,
+            "OpenStreetMap": osm
+        };
+
+        const overlays = {
+            "Тепловые аномалии": this.markersLayer
+        }
+
+        L.control.zoom({
+            position: 'bottomright'
+        }).addTo(this.map);
+        L.control.layers(baseMaps, overlays).addTo(this.map);
     }
 
     componentWillUnmount() {
