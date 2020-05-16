@@ -126,7 +126,9 @@ class Map extends React.Component {
         L.control.zoom({
             position: 'bottomright'
         }).addTo(this.map);
-        L.control.layers(baseMaps, overlays).addTo(this.map);
+        L.control.layers(baseMaps, overlays, {
+            position: 'bottomleft'
+        }).addTo(this.map);
     }
 
     componentWillUnmount() {
