@@ -1,23 +1,23 @@
 {
-  "en": {
+  "es": {
     "translation": {
-      "title": "Thermal anomalies",
-      "select_since": "Since",
-      "select_to": "To",
-      "select_max": "Amount (max.)",
-      "select_update_button": "Update",
-      "note_updates": "Data updates every 5 minutes",
-      "note_time": "Local time",
-      "popup_shooting_date": "Shooting date",
-      "popup_temperature": "Temperature",
-      "popup_satellite": "Satellite",
-      "popup_coordinates": "Coordinates",
+      "title": "Anomalías térmicas",
+      "select_since": "Desde",
+      "select_to": "Hasta",
+      "select_max": "Cantidad (máx.)",
+      "select_update_button": "Actualizar",
+      "note_updates": "Los datos se actualizan cada 5 minutos",
+      "note_time": "Tiempo local",
+      "popup_shooting_date": "Fecha de adquisición",
+      "popup_temperature": "Temperatura",
+      "popup_satellite": "Satélite",
+      "popup_coordinates": "Coordenadas",
       "author_copyright": "Pavel Kasila",
-      "select_language": "Select language",
-      "error": "Something went wrong!",
-      "layer_satellite": "Satellite",
-      "layer_thermal_anomalies": "Thermal anomalies",
-      "datetime_format": "MMMM d, yyyy h:mm aa"
+      "select_language": "Seleccione idioma",
+      "error": "Ha ocurrido un error",
+      "layer_satellite": "Satélite",
+      "layer_thermal_anomalies": "Anomalías térmicas",
+      "datetime_format": "MMMM d, yyyy HH:mm"
     }
   }
 }

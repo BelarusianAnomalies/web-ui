@@ -12,13 +12,15 @@ import {Helmet} from 'react-helmet';
 
 import ru from 'date-fns/locale/ru';
 import en from 'date-fns/locale/en-US';
+import es from 'date-fns/locale/es';
 registerLocale('ru', ru);
 registerLocale('en', en);
+registerLocale('es', es);
 
 const L = Object.assign(L1, L2);
 
 const localeStorage = localStorage;
-const availableLocales = ['ru', 'en'];
+const availableLocales = ['ru', 'en', 'es'];
 
 class Map extends React.Component {
     private fireIcon = L.icon({
@@ -288,6 +290,7 @@ ${JSON.stringify(item)}
                         <select onChange={this.languageSelectorChange} value={this.getCurrentLocale()}>
                             <option value="ru">Русский</option>
                             <option value="en">English</option>
+                            <option value="es">Español</option>
                         </select>
                     </div>
                 </div>
