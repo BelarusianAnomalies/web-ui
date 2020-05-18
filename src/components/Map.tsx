@@ -295,6 +295,12 @@ ${JSON.stringify(item)}
     }
 
     async languageSelectorChange(e: ChangeEvent<HTMLSelectElement>) {
+        // @ts-ignore
+        window.gtag('event', 'select_language', {
+            'event_category' : 'i18n',
+            'event_label' : e.target.value
+        });
+
         await this.setLanguage(e.target.value);
     }
 
