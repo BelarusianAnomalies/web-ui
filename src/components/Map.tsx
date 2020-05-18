@@ -73,7 +73,8 @@ class Map extends React.Component {
 
         this.map = L.map('mainMap', {
             zoomControl: false,
-            layers: [ersi, osm]
+            layers: [osm],
+            maxZoom: 17,
         }).setView([53.899602, 27.559529], 7);
 
         this.map.on('moveend', (event: any) => {
