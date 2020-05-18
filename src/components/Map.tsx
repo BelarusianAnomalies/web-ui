@@ -318,7 +318,7 @@ ${JSON.stringify(item)}
         let lang = localeStorage.getItem('lang');
 
         if (lang == null || !availableLocales.includes(lang)) {
-            lang = 'en';
+            lang = 'ru';
         }
         return lang;
     }
