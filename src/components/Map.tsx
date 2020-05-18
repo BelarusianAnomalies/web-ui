@@ -310,7 +310,7 @@ ${JSON.stringify(item)}
 
     async setLanguage(language: string, forced: boolean = false) {
         localeStorage.setItem('lang', language);
-        await this.setState({currentLocale: language});
+        this.setState({currentLocale: language});
         if (forced) {
             // eslint-disable-next-line no-restricted-globals
             location.reload();
