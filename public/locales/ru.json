@@ -1,0 +1,23 @@
+{
+  "ru": {
+    "translation": {
+      "title": "Тепловые аномалии",
+      "select_since": "С",
+      "select_to": "По",
+      "select_max": "Кол-во (макс)",
+      "select_update_button": "Обновить",
+      "note_updates": "Данные обновляются каждые 5 минут",
+      "note_time": "Время - местное",
+      "popup_shooting_date": "Дата съёмки",
+      "popup_temperature": "Температура",
+      "popup_satellite": "Спутник",
+      "popup_coordinates": "Координаты",
+      "author_copyright": "Косило Павел",
+      "select_language": "Выбор языка",
+      "error": "Произошла ошибка",
+      "layer_satellite": "Спутник",
+      "layer_thermal_anomalies": "Тепловые аномалии",
+      "datetime_format": "MMMM d, yyyy HH:mm"
+    }
+  }
+}

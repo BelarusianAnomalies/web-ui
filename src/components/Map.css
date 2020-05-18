@@ -115,3 +115,18 @@
         grid-template-columns: 36px 1fr;
     }
 }
+
+.lang-selector {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    display: flex;
+    flex-flow: row;
+}
+
+.lang-selector span {
+    margin: auto 4px;
+}
+
+.lang-selector select {
+    width: 60%;
+}

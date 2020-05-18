@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import './Map.css';
 import "./MarkerCluster.css";
 import * as L1 from 'leaflet';
@@ -7,11 +7,18 @@ import * as L2 from 'leaflet.markercluster';
 import "react-datepicker/dist/react-datepicker.css";
 import MeteoEyeAPI from "../api/MeteoEyeAPI";
 import MeteoEyeResouse from "../api/MeteoEyeResouse";
+import i18next from "i18next";
+import {Helmet} from 'react-helmet';
 
 import ru from 'date-fns/locale/ru';
+import en from 'date-fns/locale/en-US';
 registerLocale('ru', ru);
+registerLocale('en', en);
 
 const L = Object.assign(L1, L2);
+
+const localeStorage = localStorage;
+const availableLocales = ['ru', 'en'];
 
 class Map extends React.Component {
     private fireIcon = L.icon({
@@ -38,13 +45,20 @@ class Map extends React.Component {
             toDate: new Date(new Date().setDate(new Date().getDate()+1)),
             count: 10000,
             updater: null,
-            isLoading: false
+            isLoading: false,
+            currentLocale: ''
         } as MapState;
 
         this.updateSinceDate = this.updateSinceDate.bind(this);
         this.updateToDate = this.updateToDate.bind(this);
         this.updateSelectionCount = this.updateSelectionCount.bind(this);
         this.updateMapData = this.updateMapData.bind(this);
+
+        this.languageSelectorChange = this.languageSelectorChange.bind(this);
+    }
+
+    componentWillMount() {
+        this.setLanguage(this.getCurrentLocale());
     }
 
     componentDidMount() {
@@ -101,7 +115,7 @@ class Map extends React.Component {
         });
 
         this.map.attributionControl.addAttribution('&copy; <a href="https://meteoeye.gis.by/">УП &quot;Геоинформационные системы&quot;</a>');
-        this.map.attributionControl.addAttribution('&copy; <a href="https://github.com/pkosilo">Косило Павел</a>');
+        this.map.attributionControl.addAttribution(`&copy; <a href="https://github.com/pkosilo">${i18next.t('author_copyright')}</a>`);
         this.map.attributionControl.addAttribution('<a href="https://github.com/BelarusianAnomalies/web-ui">GitHub</a>');
 
         this.markersLayer = L.markerClusterGroup();
@@ -114,14 +128,16 @@ class Map extends React.Component {
         }, 5 * 60 * 1000);
         this.setState({updater: updater})
 
-        const baseMaps = {
-            "Спутник": ersi,
-            "OpenStreetMap": osm
-        };
+        const baseMaps = {};
 
-        const overlays = {
-            "Тепловые аномалии": this.markersLayer
-        }
+        // @ts-ignore
+        baseMaps[i18next.t('layer_satellite')] = ersi
+        // @ts-ignore
+        baseMaps["OpenStreetMap"] = osm
+
+        const overlays = {}
+        // @ts-ignore
+        overlays[i18next.t('layer_thermal_anomalies')] = this.markersLayer;
 
         L.control.zoom({
             position: 'bottomright'
@@ -170,19 +186,19 @@ ${JSON.stringify(item)}
 </div>
 <table>
     <tr>
-        <th>Дата съёмки</th>
+        <th>${i18next.t('popup_shooting_date')}</th>
         <td>${new Date(Date.parse(item.shootingDateTime.replace(' ', ''))).toLocaleString()}</td>
     </tr>
     <tr>
-        <th>Температура</th>
+        <th>${i18next.t('popup_temperature')}</th>
         <td>${item.temperature} К</td>
     </tr>
     <tr>
-        <th>Спутник</th>
+        <th>${i18next.t('popup_satellite')}</th>
         <td>${item.satellite}</td>
     </tr>
     <tr>
-        <th>Координаты</th>
+        <th>${i18next.t('popup_coordinates')}</th>
         <td>
             ${coordinates[1]}, ${coordinates[0]}
         </td>
@@ -221,27 +237,30 @@ ${JSON.stringify(item)}
         const state = (this.state as MapState);
         return (
             <React.Fragment>
+                <Helmet>
+                    <title>{ i18next.t('title') }</title>
+                </Helmet>
                 <div id="mainMap" className="leaflet">
                 </div>
                 <div id="dateSelector">
                     <div className="title">
-                        <h3>Тепловые аномалии</h3>
+                        <h3>{i18next.t('title')}</h3>
                     </div>
                     <div className="settings">
                         <div className="settings-row mobile-nonsense">
-                            <span>С:</span>
+                            <span>{i18next.t('select_since')}:</span>
                             <div className="input">
-                                <DatePicker selectsStart startDate={state.sinceDate} endDate={state.toDate} locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.sinceDate} onChange={this.updateSinceDate} />
+                                <DatePicker selectsStart startDate={state.sinceDate} endDate={state.toDate} locale={this.getCurrentLocale()} dateFormat={i18next.t('datetime_format')} showTimeSelect selected={state.sinceDate} onChange={this.updateSinceDate} />
                             </div>
                         </div>
                         <div className="settings-row mobile-nonsense">
-                            <span>По:</span>
+                            <span>{i18next.t('select_to')}:</span>
                             <div className="input">
-                                <DatePicker selectsEnd startDate={state.sinceDate} endDate={state.toDate} locale="ru" dateFormat="MMMM d, yyyy HH:mm" showTimeSelect selected={state.toDate} minDate={state.sinceDate} onChange={this.updateToDate} />
+                                <DatePicker selectsEnd startDate={state.sinceDate} endDate={state.toDate} locale={this.getCurrentLocale()} dateFormat={i18next.t('datetime_format')} showTimeSelect selected={state.toDate} minDate={state.sinceDate} onChange={this.updateToDate} />
                             </div>
                         </div>
                         <div className="settings-row">
-                            <span>Кол-во (max):</span>
+                            <span>{i18next.t('select_max')}:</span>
                             <div className="input">
                                 <input type="number" value={state.count} onChange={this.updateSelectionCount} />
                             </div>
@@ -251,21 +270,50 @@ ${JSON.stringify(item)}
                         {
                             state.isLoading ? <div className="loader"/> :
                                 <p>
-                                    Обновить
+                                    {i18next.t('select_update_button')}
                                 </p>
                         }
                     </button>
                     {
-                        state.error != null ? <small>Произошла ошибка</small> : null
+                        state.error != null ? <small>{i18next.t('error')}</small> : null
                     }
                     <div className="notes">
-                        <small>* Данные обновляются каждые 5 минут</small>
+                        <small>* {i18next.t('note_updates')}</small>
                         <br />
-                        <small>* Время - местное</small>
+                        <small>* {i18next.t('note_time')}</small>
+                    </div>
+                    <div className="lang-selector">
+                        <span>{i18next.t('select_language')}:</span>
+                        <select onChange={this.languageSelectorChange} value={this.getCurrentLocale()}>
+                            <option value="ru">Русский</option>
+                            <option value="en">English</option>
+                        </select>
                     </div>
                 </div>
             </React.Fragment>
         );
+    }
+
+    async languageSelectorChange(e: ChangeEvent<HTMLSelectElement>) {
+        await this.setLanguage(e.target.value);
+    }
+
+    async setLanguage(language: string) {
+        localeStorage.setItem('lang', language);
+        this.setState({currentLocale: language});
+        await i18next.init({
+            lng: language,
+            resources: require(`../../public/locales/${language}.json`)
+        });
+    }
+
+    getCurrentLocale(): string {
+        let lang = localeStorage.getItem('lang');
+
+        if (lang == null || !availableLocales.includes(lang)) {
+            lang = 'en';
+        }
+        return lang;
     }
 }
 
@@ -276,7 +324,8 @@ interface MapState {
     toDate: Date,
     count: number,
     updater: any,
-    isLoading: boolean
+    isLoading: boolean,
+    currentLocale: string
 }
 
 export default Map;
