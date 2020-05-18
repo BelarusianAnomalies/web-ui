@@ -305,12 +305,17 @@ ${JSON.stringify(item)}
             'event_label' : e.target.value
         });
 
-        await this.setLanguage(e.target.value);
+        await this.setLanguage(e.target.value, true);
     }
 
-    async setLanguage(language: string) {
+    async setLanguage(language: string, forced: boolean = false) {
         localeStorage.setItem('lang', language);
-        this.setState({currentLocale: language});
+        const state = (this.state as MapState);
+        await this.setState({currentLocale: language});
+        if (forced) {
+            // eslint-disable-next-line no-restricted-globals
+            location.reload();
+        }
         await i18next.init({
             lng: language,
             resources: require(`../../public/locales/${language}.json`)
