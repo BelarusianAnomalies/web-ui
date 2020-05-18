@@ -1,0 +1,23 @@
+{
+  "en": {
+    "translation": {
+      "title": "Thermal anomalies",
+      "select_since": "Since",
+      "select_to": "To",
+      "select_max": "Amount (max.)",
+      "select_update_button": "Update",
+      "note_updates": "Data updates every 5 minutes",
+      "note_time": "Local time",
+      "popup_shooting_date": "Shooting date",
+      "popup_temperature": "Temperature",
+      "popup_satellite": "Satellite",
+      "popup_coordinates": "Coordinates",
+      "author_copyright": "Pavel Kasila",
+      "select_language": "Select language",
+      "error": "Something went wrong!",
+      "layer_satellite": "Satellite",
+      "layer_thermal_anomalies": "Thermal anomalies",
+      "datetime_format": "MMMM d, yyyy h:mm aa"
+    }
+  }
+}
