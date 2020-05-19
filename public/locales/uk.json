@@ -1,0 +1,23 @@
+{
+  "uk": {
+    "translation": {
+      "title": "Теплові аномалії",
+      "select_since": "З",
+      "select_to": "По",
+      "select_max": "Кількість (max)",
+      "select_update_button": "Оновити",
+      "note_updates": "Дані оновлюються кожні 5 хвилин",
+      "note_time": "Місцевий час",
+      "popup_shooting_date": "Дата зйомки",
+      "popup_temperature": "Температура",
+      "popup_satellite": "Супутник",
+      "popup_coordinates": "Координати",
+      "author_copyright": "Косило Павло",
+      "select_language": "Вибір мови",
+      "error": "Виникла помилка",
+      "layer_satellite": "Супутник",
+      "layer_thermal_anomalies": "Теплові аномалії",
+      "datetime_format": "MMMM d, yyyy HH:mm"
+    }
+  }
+}

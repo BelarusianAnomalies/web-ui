@@ -1,0 +1,23 @@
+{
+  "be": {
+    "translation": {
+      "title": "Цеплавыя анамаліі",
+      "select_since": "З",
+      "select_to": "Па",
+      "select_max": "Колькасць (max)",
+      "select_update_button": "Абнавіць",
+      "note_updates": "Дадзеныя абнаўляюцца кожныя 5 хвілін",
+      "note_time": "Мясцовы час",
+      "popup_shooting_date": "Дата здымкі",
+      "popup_temperature": "Тэмпература",
+      "popup_satellite": "Спадарожнік",
+      "popup_coordinates": "Каардынаты",
+      "author_copyright": "Касіла Павел",
+      "select_language": "Выбар мовы",
+      "error": "Адбылася памылка",
+      "layer_satellite": "Спадарожнік",
+      "layer_thermal_anomalies": "Цеплавыя анамаліі",
+      "datetime_format": "MMMM d, yyyy HH:mm"
+    }
+  }
+}

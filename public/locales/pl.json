@@ -1,0 +1,23 @@
+{
+  "pl": {
+    "translation": {
+      "title": "Anomalie termiczne",
+      "select_since": "Z",
+      "select_to": "Do",
+      "select_max": "Ilość (max)",
+      "select_update_button": "Odświeżać",
+      "note_updates": "Dane są aktualizowane co 5 minut",
+      "note_time": "Czas lokalny",
+      "popup_shooting_date": "Data strzelania",
+      "popup_temperature": "Temperatura",
+      "popup_satellite": "Satelita",
+      "popup_coordinates": "Współrzędne",
+      "author_copyright": "Kosilo Pavel",
+      "select_language": "Wybór języka",
+      "error": "Wystąpił błąd",
+      "layer_satellite": "Satelita",
+      "layer_thermal_anomalies": "Anomalie termiczne",
+      "datetime_format": "MMMM d, yyyy HH:mm"
+    }
+  }
+}
